@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Modelos de IA: guía visual</title>
+<meta name="description" content="Entiende qué son los modelos de IA, por qué importan hoy y cómo usarlos en tu día a día, sin tecnicismos.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ===== TOKENS (edita aquí colores y espaciado) ===== */
+:root{
+  --bg:#FAFAFA;
+  --surface:#FFFFFF;
+  --text:#1F2328;        /* gris carbón */
+  --muted:#5B6270;       /* texto secundario */
+  --border:#E6E8EC;
+  --accent:#3B4FD8;      /* único color de acento */
+  --accent-dark:#2F3FB5;
+  --accent-soft:#EEF0FF;
+  --radius:14px;
+  --maxw:1120px;
+  --font:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:84px}
+body{margin:0;background:var(--bg);color:var(--text);font-family:var(--font);font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased}
+img,svg{display:block;max-width:100%}
+a{color:inherit}
+h1,h2,h3{line-height:1.15;letter-spacing:-.02em;margin:0;font-weight:700}
+p{margin:0}
+.container{width:100%;max-width:var(--maxw);margin:0 auto;padding:0 20px}
+.skip{position:absolute;left:-999px;top:8px;background:var(--accent);color:#fff;padding:10px 16px;border-radius:8px;z-index:100}
+.skip:focus{left:12px}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:6px}
+.ic{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
+
+/* ===== BOTONES Y ETIQUETAS ===== */
+.btn{display:inline-flex;align-items:center;gap:8px;font:inherit;font-weight:600;font-size:15px;padding:12px 20px;border-radius:10px;border:1px solid transparent;cursor:pointer;text-decoration:none;transition:background .2s,border-color .2s,transform .2s}
+.btn-primary{background:var(--accent);color:#fff}
+.btn-primary:hover{background:var(--accent-dark)}
+.btn-ghost{background:var(--surface);color:var(--text);border-color:var(--border)}
+.btn-ghost:hover{border-color:#C9CDD6}
+.btn:active{transform:translateY(1px)}
+.tag{display:inline-block;font-size:12px;font-weight:600;letter-spacing:.02em;color:var(--accent);background:var(--accent-soft);padding:4px 10px;border-radius:999px}
+
+/* ===== HEADER ===== */
+.site-header{position:sticky;top:0;z-index:50;background:rgba(250,250,250,.88);backdrop-filter:saturate(1.4) blur(10px);border-bottom:1px solid var(--border)}
+.nav-row{display:flex;align-items:center;justify-content:space-between;height:68px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;text-decoration:none;letter-spacing:-.01em}
+.brand-mark{width:30px;height:30px;border-radius:8px;background:var(--accent);color:#fff;display:grid;place-items:center}
+.brand-mark .ic{width:17px;height:17px}
+.nav-list{display:flex;gap:6px;list-style:none;margin:0;padding:0}
+.nav-list a{display:block;padding:8px 12px;border-radius:8px;text-decoration:none;color:var(--muted);font-size:15px;font-weight:500;transition:color .2s,background .2s}
+.nav-list a:hover,.nav-list a.active{color:var(--text);background:#F0F1F4}
+.menu-btn{display:none;background:var(--surface);border:1px solid var(--border);border-radius:10px;width:42px;height:42px;place-items:center;cursor:pointer;color:var(--text)}
+
+/* ===== SECCIONES ===== */
+section{padding:92px 0}
+.section-head{max-width:640px;margin-bottom:44px}
+.section-head h2{font-size:clamp(28px,4vw,40px);margin-top:14px}
+.section-head p{color:var(--muted);margin-top:14px;font-size:18px}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:26px}
+
+/* ===== HERO ===== */
+.hero{padding:84px 0 72px}
+.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:56px;align-items:center}
+.hero h1{font-size:clamp(36px,6vw,60px);font-weight:800;margin-top:18px}
+.hero h1 em{font-style:normal;color:var(--accent)}
+.hero p.lead{font-size:19px;color:var(--muted);margin-top:22px;max-width:540px}
+.hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
+.hero-meta{display:flex;flex-wrap:wrap;gap:22px;margin-top:38px;color:var(--muted);font-size:14px}
+.hero-meta span{display:inline-flex;align-items:center;gap:8px}
+.hero-meta .ic{color:var(--accent);width:18px;height:18px}
+.chat{padding:22px;display:grid;gap:14px}
+.chat-top{display:flex;gap:6px}
+.chat-top i{width:10px;height:10px;border-radius:50%;background:var(--border)}
+.bubble{padding:14px 16px;border-radius:12px;font-size:15px;line-height:1.55}
+.bubble small{display:block;font-size:12px;font-weight:600;color:var(--muted);margin-bottom:4px;text-transform:uppercase;letter-spacing:.05em}
+.bubble.me{background:#F3F4F6}
+.bubble.ai{background:var(--accent-soft);border:1px solid #DDE1FF}
+.bubble ul{margin:6px 0 0;padding-left:18px}
+.caret{display:inline-block;width:7px;height:15px;background:var(--accent);vertical-align:-2px;margin-left:2px;animation:blink 1s steps(2) infinite}
+@keyframes blink{50%{opacity:0}}
+
+/* ===== QUÉ SON ===== */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;counter-reset:s}
+.step{position:relative}
+.step::before{counter-increment:s;content:counter(s);display:grid;place-items:center;width:34px;height:34px;border-radius:10px;background:var(--accent-soft);color:var(--accent);font-weight:700;margin-bottom:16px}
+.step h3,.why h3,.impact h3{font-size:18px;margin-bottom:8px}
+.step p,.why p{color:var(--muted);font-size:15.5px}
+.why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:18px}
+.why .ic-wrap{width:42px;height:42px;border-radius:11px;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center;margin-bottom:16px}
+.sub{font-size:14px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin:48px 0 16px}
+.callout{display:flex;gap:14px;align-items:flex-start;margin-top:28px;background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:12px;padding:20px 22px;color:var(--muted)}
+.callout .ic{color:var(--accent);margin-top:3px}
+.callout strong{color:var(--text)}
+
+/* ===== PORTAFOLIO ===== */
+#casos{background:var(--surface);border-block:1px solid var(--border)}
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.chip{font:inherit;font-size:14px;font-weight:500;padding:9px 16px;border-radius:999px;border:1px solid var(--border);background:var(--surface);color:var(--muted);cursor:pointer;transition:all .2s}
+.chip:hover{border-color:#C9CDD6;color:var(--text)}
+.chip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+.count{font-size:14px;color:var(--muted);margin-bottom:22px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px}
+.case{display:flex;flex-direction:column;gap:12px;text-align:left;font:inherit;color:inherit;cursor:pointer;background:var(--bg);width:100%;transition:border-color .2s,transform .25s}
+.case:hover{border-color:#C3C9F5;transform:translateY(-3px)}
+.case-top{display:flex;justify-content:space-between;align-items:center}
+.case .ic-wrap{width:42px;height:42px;border-radius:11px;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center}
+.case h3{font-size:18px}
+.case p{color:var(--muted);font-size:15px;flex:1}
+.case .more{display:inline-flex;align-items:center;gap:6px;font-weight:600;font-size:14px;color:var(--accent)}
+.case .more .ic{width:16px;height:16px;transition:transform .2s}
+.case:hover .more .ic{transform:translateX(3px)}
+.case.hide{display:none}
+
+/* ===== MODAL ===== */
+dialog{border:1px solid var(--border);border-radius:18px;padding:0;width:min(640px,calc(100% - 32px));max-height:calc(100dvh - 40px);background:var(--surface);color:var(--text);box-shadow:0 20px 60px rgba(20,24,40,.18)}
+dialog::backdrop{background:rgba(20,24,40,.42);backdrop-filter:blur(2px)}
+dialog[open]{animation:pop .22s ease}
+@keyframes pop{from{opacity:0;transform:translateY(10px) scale(.98)}}
+.modal-in{padding:30px;overflow:auto;max-height:calc(100dvh - 40px)}
+.modal-close{position:absolute;top:16px;right:16px;width:38px;height:38px;display:grid;place-items:center;border-radius:10px;border:1px solid var(--border);background:var(--surface);cursor:pointer;color:var(--muted)}
+.modal-close:hover{color:var(--text)}
+.modal h3{font-size:26px;margin:14px 40px 12px 0}
+.modal .desc{color:var(--muted);font-size:17px}
+.modal h4{font-size:13px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin:26px 0 10px}
+.modal ol{margin:0;padding-left:20px;display:grid;gap:6px}
+.promptbox{background:#F3F4F6;border:1px solid var(--border);border-radius:12px;padding:14px 16px;font-size:15px}
+.limit{display:flex;gap:10px;background:var(--accent-soft);border-radius:12px;padding:14px 16px;font-size:15px}
+.limit .ic{color:var(--accent);margin-top:2px}
+
+/* ===== EVOLUCIÓN ===== */
+.timeline{list-style:none;margin:0;padding:0 0 0 28px;border-left:2px solid var(--border);display:grid;gap:26px}
+.timeline li{position:relative}
+.timeline li::before{content:"";position:absolute;left:-36px;top:7px;width:14px;height:14px;border-radius:50%;background:var(--surface);border:3px solid var(--accent)}
+.timeline time{font-weight:700;color:var(--accent);font-size:14px}
+.timeline h3{font-size:19px;margin:2px 0 6px}
+.timeline p{color:var(--muted);max-width:640px}
+.impact-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.ba{display:grid;gap:10px;font-size:15px}
+.ba div{padding:12px 14px;border-radius:10px;background:#F3F4F6;color:var(--muted)}
+.ba div b{display:block;font-size:12px;letter-spacing:.07em;text-transform:uppercase;margin-bottom:2px;color:var(--muted)}
+.ba div.now{background:var(--accent-soft);color:var(--text)}
+.ba div.now b{color:var(--accent)}
+.evo-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:56px;align-items:start}
+
+/* ===== FAQ ===== */
+.faq{max-width:760px;display:grid;gap:12px}
+.faq-item{padding:0;overflow:hidden}
+.faq-q{all:unset;box-sizing:border-box;width:100%;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:20px 24px;cursor:pointer;font-weight:600;font-size:17px}
+.faq-q:focus-visible{outline:3px solid var(--accent);outline-offset:-3px}
+.faq-q .ic{color:var(--accent);transition:transform .25s}
+.faq-q[aria-expanded="true"] .ic{transform:rotate(45deg)}
+.faq-a{display:grid;grid-template-rows:0fr;transition:grid-template-rows .3s ease}
+.faq-a[data-open="true"]{grid-template-rows:1fr}
+.faq-a>div{overflow:hidden}
+.faq-a p{padding:0 24px 22px;color:var(--muted)}
+
+/* ===== CTA Y FOOTER ===== */
+.cta{padding:20px 0 92px}
+.cta-box{text-align:center;padding:60px 28px;background:var(--surface)}
+.cta-box h2{font-size:clamp(28px,4vw,40px);max-width:600px;margin:14px auto 0}
+.cta-box>p{color:var(--muted);font-size:18px;max-width:540px;margin:16px auto 0}
+.starter{max-width:560px;margin:30px auto 0;text-align:left;background:#F3F4F6;border:1px solid var(--border);border-radius:12px;padding:16px 18px;font-size:15px}
+.starter small{display:block;font-weight:600;color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.07em;margin-bottom:6px}
+.cta-actions{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:26px}
+footer{border-top:1px solid var(--border);padding:30px 0;color:var(--muted);font-size:14px}
+.foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px}
+
+/* ===== ANIMACIÓN DE ENTRADA ===== */
+.js .reveal{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease}
+.js .reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+  .js .reveal{opacity:1;transform:none}
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width:900px){
+  .hero-grid,.evo-grid{grid-template-columns:1fr;gap:40px}
+  .steps,.why-grid{grid-template-columns:1fr}
+}
+@media (max-width:820px){
+  section{padding:68px 0}
+  .menu-btn{display:grid}
+  .nav-list{position:absolute;top:68px;left:0;right:0;flex-direction:column;background:var(--bg);border-bottom:1px solid var(--border);padding:10px 20px 18px;display:none}
+  .nav-list.open{display:flex}
+  .nav-list a{padding:13px 12px;font-size:16px}
+  .impact-grid{grid-template-columns:1fr}
+}
+@media (max-width:480px){
+  .hero{padding-top:52px}
+  .modal-in{padding:24px 20px}
+  .btn{width:100%;justify-content:center}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== ICONOS SVG (sprite reutilizable) ===== -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="i-pen" viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></symbol>
+  <symbol id="i-code" viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></symbol>
+  <symbol id="i-chart" viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></symbol>
+  <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9Z"/><path d="M19 17v4M17 19h4"/></symbol>
+  <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 2 3 14h9l-1 8 10-12h-9Z"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></symbol>
+  <symbol id="i-file" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6M8 13h8M8 17h8"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></symbol>
+  <symbol id="i-image" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-5-5L5 21"/></symbol>
+  <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></symbol>
+  <symbol id="i-book" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V3H6.5A2.5 2.5 0 0 0 4 5.5Z"/><path d="M4 19.5V22h16"/></symbol>
+  <symbol id="i-bulb" viewBox="0 0 24 24"><path d="M9 18h6M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.3h6c0-1 .4-1.8 1-2.3A7 7 0 0 0 12 2Z"/></symbol>
+  <symbol id="i-table" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/></symbol>
+  <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15 15 0 0 1 0 20 15 15 0 0 1 0-20Z"/></symbol>
+  <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></symbol>
+</svg>
+
+<a class="skip" href="#main">Saltar al contenido</a>
+
+<!-- ===== ENCABEZADO ===== -->
+<header class="site-header">
+  <div class="container nav-row">
+    <a class="brand" href="#inicio" aria-label="Ir al inicio">
+      <span class="brand-mark"><svg class="ic" aria-hidden="true"><use href="#i-spark"/></svg></span>
+      Guía de IA
+    </a>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="nav" aria-label="Abrir menú">
+      <svg class="ic" aria-hidden="true"><use href="#i-menu"/></svg>
+    </button>
+    <nav aria-label="Principal">
+      <ul class="nav-list" id="nav">
+        <li><a href="#que-son">Qué son</a></li>
+        <li><a href="#casos">Casos de uso</a></li>
+        <li><a href="#evolucion">Evolución</a></li>
+        <li><a href="#faq">Preguntas</a></li>
+        <li><a href="#empieza">Empieza</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="inicio">
+  <div class="container hero-grid">
+    <div>
+      <span class="tag">Guía para curiosos</span>
+      <h1>Los modelos de IA, <em>explicados</em> sin complicaciones</h1>
+      <p class="lead">Ya están en tu trabajo, tus estudios y tu tiempo libre. Descubre qué son, qué pueden hacer por ti hoy y cómo empezar a usarlos con criterio.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#casos">Explorar casos de uso <svg class="ic" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        <a class="btn btn-ghost" href="#que-son">Entender lo básico</a>
+      </div>
+      <div class="hero-meta">
+        <span><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg>Sin jerga técnica</span>
+        <span><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg>10 casos reales</span>
+        <span><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg>Lectura de 5 minutos</span>
+      </div>
+    </div>
+    <!-- Ejemplo visual de conversación -->
+    <div class="card chat" role="img" aria-label="Ejemplo de conversación: una persona pide resumir un informe y el modelo responde con cinco puntos clave.">
+      <div class="chat-top" aria-hidden="true"><i></i><i></i><i></i></div>
+      <div class="bubble me" aria-hidden="true"><small>Tú</small>Resume este informe en 3 puntos para mi equipo y propón un siguiente paso.</div>
+      <div class="bubble ai" aria-hidden="true"><small>Modelo de IA</small>
+        <ul>
+          <li>Las ventas crecieron en el segundo trimestre.</li>
+          <li>El costo de soporte bajó con el nuevo flujo.</li>
+          <li>Riesgo principal: dependencia de un proveedor.</li>
+        </ul>
+        <p style="margin-top:8px">Siguiente paso sugerido: validar alternativas<span class="caret"></span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== QUÉ SON Y POR QUÉ IMPORTAN ===== -->
+<section id="que-son">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="tag">Lo esencial</span>
+      <h2>Qué son y por qué importan hoy</h2>
+      <p>Un modelo de IA es un programa entrenado con enormes cantidades de ejemplos (textos, imágenes, código, audio) para reconocer patrones y generar respuestas útiles. No piensa como una persona, pero puede redactar, resumir, programar, analizar y conversar.</p>
+    </div>
+
+    <h3 class="sub">Cómo funciona, en tres pasos</h3>
+    <div class="steps">
+      <article class="card step reveal"><h3>Aprende de ejemplos</h3><p>Durante el entrenamiento, el modelo analiza millones de textos, imágenes o fragmentos de código y aprende cómo se relacionan las ideas.</p></article>
+      <article class="card step reveal"><h3>Recibe una instrucción</h3><p>Tú le escribes lo que necesitas, con tus palabras. Mientras más contexto des (objetivo, público, formato), mejor será el resultado.</p></article>
+      <article class="card step reveal"><h3>Genera una respuesta</h3><p>Construye una respuesta nueva a partir de lo aprendido. Tú la revisas, la ajustas y decides qué hacer con ella.</p></article>
+    </div>
+
+    <h3 class="sub">Por qué importan hoy</h3>
+    <div class="why-grid">
+      <article class="card why reveal">
+        <div class="ic-wrap"><svg class="ic" aria-hidden="true"><use href="#i-globe"/></svg></div>
+        <h3>Bajan la barrera de entrada</h3><p>Hablas con ellos en lenguaje natural. No necesitas saber programar para pedirles ayuda con una tarea compleja.</p>
+      </article>
+      <article class="card why reveal">
+        <div class="ic-wrap"><svg class="ic" aria-hidden="true"><use href="#i-bolt"/></svg></div>
+        <h3>Ahorran tiempo</h3><p>Reducen el trabajo repetitivo: borradores, resúmenes, búsquedas y primeras versiones que antes tomaban horas.</p>
+      </article>
+      <article class="card why reveal">
+        <div class="ic-wrap"><svg class="ic" aria-hidden="true"><use href="#i-spark"/></svg></div>
+        <h3>Amplían lo posible</h3><p>Una persona sola puede explorar más ideas, aprender más rápido y crear cosas que antes requerían un equipo.</p>
+      </article>
+    </div>
+
+    <div class="callout reveal">
+      <svg class="ic" aria-hidden="true"><use href="#i-info"/></svg>
+      <p><strong>Úsalos como asistente, no como oráculo.</strong> Pueden equivocarse o inventar datos con mucha seguridad. Verifica lo importante y decide siempre tú.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PORTAFOLIO DE CASOS DE USO ===== -->
+<section id="casos">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="tag">Portafolio</span>
+      <h2>Casos de uso para tu día a día</h2>
+      <p>Filtra por categoría y abre cualquier tarjeta para ver cómo se usa, un ejemplo de instrucción y qué tener en cuenta.</p>
+    </div>
+    <div class="filters" role="group" aria-label="Filtrar casos por categoría" id="filters"></div>
+    <p class="count" id="count" aria-live="polite"></p>
+    <div class="grid" id="grid"></div>
+  </div>
+</section>
+
+<!-- ===== EVOLUCIÓN E IMPACTO ===== -->
+<section id="evolucion">
+  <div class="container evo-grid">
+    <div>
+      <div class="section-head reveal" style="margin-bottom:32px">
+        <span class="tag">Evolución</span>
+        <h2>De la investigación a tu bolsillo</h2>
+        <p>En pocos años pasamos de laboratorios a herramientas que millones de personas usan a diario.</p>
+      </div>
+      <ol class="timeline">
+        <li class="reveal"><time>2017</time><h3>Nace el Transformer</h3><p>Una nueva arquitectura permite procesar lenguaje con mucha más eficacia. Es la base de los modelos actuales.</p></li>
+        <li class="reveal"><time>2020–2021</time><h3>Modelos de lenguaje a gran escala</h3><p>Se demuestra que, con suficientes datos, un modelo puede redactar, resumir y traducir con buena calidad.</p></li>
+        <li class="reveal"><time>2022</time><h3>Llegan los asistentes conversacionales</h3><p>Por primera vez cualquier persona puede conversar con un modelo desde el navegador.</p></li>
+        <li class="reveal"><time>2023–2024</time><h3>Multimodalidad y más contexto</h3><p>Los modelos entienden texto, imágenes y audio, y manejan documentos cada vez más largos.</p></li>
+        <li class="reveal"><time>2025 en adelante</time><h3>Razonamiento y agentes</h3><p>Los modelos planifican pasos, usan herramientas y completan tareas de varias etapas con supervisión humana.</p></li>
+      </ol>
+    </div>
+
+    <div>
+      <div class="section-head reveal" style="margin-bottom:32px">
+        <span class="tag">Impacto</span>
+        <h2>Lo que cambia en la práctica</h2>
+      </div>
+      <div class="impact-grid">
+        <article class="card impact reveal"><h3>Estudio</h3><div class="ba"><div><b>Antes</b>Buscar explicaciones en varias fuentes.</div><div class="now"><b>Ahora</b>Un tutor que explica a tu ritmo y te evalúa.</div></div></article>
+        <article class="card impact reveal"><h3>Trabajo</h3><div class="ba"><div><b>Antes</b>Empezar cada documento desde cero.</div><div class="now"><b>Ahora</b>Partir de un borrador y dedicarte a mejorarlo.</div></div></article>
+        <article class="card impact reveal"><h3>Creación</h3><div class="ba"><div><b>Antes</b>Bloqueo ante la página en blanco.</div><div class="now"><b>Ahora</b>Decenas de ideas para explorar en minutos.</div></div></article>
+        <article class="card impact reveal"><h3>Programación</h3><div class="ba"><div><b>Antes</b>Horas buscando la causa de un error.</div><div class="now"><b>Ahora</b>Diagnóstico y propuesta de solución al instante.</div></div></article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FAQ ===== -->
+<section id="faq" style="background:var(--surface);border-block:1px solid var(--border)">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="tag">Preguntas frecuentes</span>
+      <h2>Lo que casi todos se preguntan</h2>
+    </div>
+    <div class="faq" id="faqList"></div>
+  </div>
+</section>
+
+<!-- ===== CIERRE Y LLAMADO A LA ACCIÓN ===== -->
+<section class="cta" id="empieza" style="padding-top:92px">
+  <div class="container">
+    <div class="card cta-box reveal">
+      <span class="tag">Tu turno</span>
+      <h2>Empieza hoy con una tarea pequeña</h2>
+      <p>La mejor forma de entender la IA es usarla. Elige algo cotidiano y prueba esta instrucción con el asistente que prefieras.</p>
+      <div class="starter">
+        <small>Instrucción de ejemplo</small>
+        <span id="starterText">Actúa como un tutor paciente. Explícame [tema] como si fuera nuevo para mí, con un ejemplo cotidiano y tres preguntas para comprobar si lo entendí.</span>
+      </div>
+      <div class="cta-actions">
+        <button class="btn btn-primary" id="copyBtn" type="button"><svg class="ic" aria-hidden="true"><use href="#i-copy"/></svg><span id="copyLabel">Copiar instrucción</span></button>
+        <a class="btn btn-ghost" href="#casos">Ver más ideas</a>
+      </div>
+      <p id="copyStatus" class="count" style="margin:14px 0 0" aria-live="polite"></p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="container foot">
+    <span>Guía sobre modelos de IA · Contenido informativo y general.</span>
+    <a href="#inicio">Volver arriba ↑</a>
+  </div>
+</footer>
+
+<!-- ===== MODAL DE DETALLE ===== -->
+<dialog id="modal" aria-labelledby="mTitle">
+  <div class="modal-in modal">
+    <button class="modal-close" id="mClose" aria-label="Cerrar detalle"><svg class="ic" aria-hidden="true"><use href="#i-x"/></svg></button>
+    <span class="tag" id="mCat"></span>
+    <h3 id="mTitle"></h3>
+    <p class="desc" id="mDesc"></p>
+    <h4>Cómo se usa</h4>
+    <ol id="mSteps"></ol>
+    <h4>Instrucción de ejemplo</h4>
+    <div class="promptbox" id="mPrompt"></div>
+    <h4>Ten en cuenta</h4>
+    <div class="limit"><svg class="ic" aria-hidden="true"><use href="#i-shield"/></svg><span id="mLimit"></span></div>
+  </div>
+</dialog>
+
+<script>
+document.documentElement.classList.add('js');
+
+/* ===== DATOS EDITABLES: categorías y casos de uso ===== */
+const CATS = {redaccion:'Redacción', codigo:'Código', analisis:'Análisis', creatividad:'Creatividad', productividad:'Productividad'};
+
+const CASES = [
+  {cat:'redaccion', icon:'mail', title:'Correos y mensajes claros',
+   short:'Pasa de una idea suelta a un mensaje profesional con el tono adecuado.',
+   desc:'El modelo convierte tus notas en un correo bien estructurado y adapta el tono: formal, cercano, firme o diplomático.',
+   steps:['Cuenta a quién escribes y qué quieres lograr.','Pega tus notas o ideas sueltas.','Pide un tono y una longitud concretos, y ajusta la versión.'],
+   prompt:'Redacta un correo breve y cordial para pedir a un cliente que confirme la reunión del jueves. Tono profesional, máximo 80 palabras.',
+   limit:'Revisa nombres, fechas y cifras antes de enviar. El modelo no conoce el contexto que no le hayas dado.'},
+  {cat:'redaccion', icon:'file', title:'Resúmenes y reescritura',
+   short:'Condensa textos largos o mejora uno que ya escribiste.',
+   desc:'Útil para sintetizar artículos, actas o informes, y para simplificar lenguaje complejo sin perder las ideas clave.',
+   steps:['Pega el texto o adjunta el documento.','Indica el formato: puntos, párrafo o tabla.','Pide una versión para un público específico.'],
+   prompt:'Resume este texto en 5 puntos y luego reescríbelo en lenguaje simple para estudiantes de secundaria.',
+   limit:'Un resumen puede omitir matices importantes. Contrástalo con el original si el tema es delicado.'},
+  {cat:'codigo', icon:'code', title:'Asistente de programación',
+   short:'Genera funciones, scripts y prototipos a partir de una descripción.',
+   desc:'Describe lo que quieres construir y obtén un primer código funcional, con explicaciones, que puedes probar y mejorar.',
+   steps:['Indica el lenguaje y el objetivo.','Pide el código por partes pequeñas.','Prueba cada parte y comparte los errores que aparezcan.'],
+   prompt:'Escribe en JavaScript una función que reciba una lista de precios y devuelva el total con 16% de impuesto, con comentarios breves.',
+   limit:'El código puede tener errores o fallos de seguridad. Pruébalo y revísalo antes de usarlo en algo real.'},
+  {cat:'codigo', icon:'search', title:'Depurar y entender código',
+   short:'Encuentra la causa de un error y aprende qué hace un fragmento ajeno.',
+   desc:'Pega el error y el código relacionado. El modelo explica qué ocurre, por qué falla y cómo corregirlo paso a paso.',
+   steps:['Copia el mensaje de error completo.','Incluye el fragmento de código implicado.','Pide la explicación y la corrección propuesta.'],
+   prompt:'Este código lanza "undefined is not a function". Explícame la causa en términos simples y muéstrame cómo corregirlo.',
+   limit:'Nunca pegues contraseñas, claves o datos privados de tu empresa en el código que compartas.'},
+  {cat:'analisis', icon:'file', title:'Lectura de documentos largos',
+   short:'Extrae ideas, riesgos y datos clave de contratos, informes o artículos.',
+   desc:'Los modelos actuales procesan documentos extensos y responden preguntas concretas sobre su contenido.',
+   steps:['Adjunta o pega el documento.','Haz preguntas específicas, no solo "resúmelo".','Pide que indique en qué sección está cada dato.'],
+   prompt:'De este informe, lista las 5 decisiones clave, los riesgos mencionados y las cifras más importantes, indicando la sección de cada una.',
+   limit:'No sustituye la revisión profesional en temas legales, médicos o financieros. Úsalo para orientarte.'},
+  {cat:'analisis', icon:'table', title:'Datos y hojas de cálculo',
+   short:'Ordena datos, detecta patrones y obtén fórmulas sin ser experto.',
+   desc:'Describe tus columnas y lo que quieres averiguar. El modelo propone fórmulas, limpia datos y sugiere gráficos.',
+   steps:['Describe las columnas y el objetivo.','Pide la fórmula o el análisis paso a paso.','Valida los resultados con una muestra pequeña.'],
+   prompt:'Tengo columnas Fecha, Producto y Ventas. ¿Qué fórmula uso para calcular las ventas totales por mes? Explícala en simple.',
+   limit:'Comprueba siempre los cálculos con datos conocidos; los errores numéricos pueden pasar desapercibidos.'},
+  {cat:'creatividad', icon:'bulb', title:'Lluvia de ideas',
+   short:'Rompe el bloqueo creativo con decenas de opciones en segundos.',
+   desc:'Nombres de proyectos, ideas de contenido, enfoques para un problema: el modelo propone muchas alternativas para que tú elijas.',
+   steps:['Define el contexto y el público.','Pide una cantidad concreta de ideas variadas.','Elige las mejores y pide desarrollarlas.'],
+   prompt:'Dame 15 ideas de nombres para un podcast sobre finanzas personales para jóvenes. Que sean cortos y fáciles de recordar.',
+   limit:'Las ideas pueden parecerse a otras existentes. Verifica la originalidad antes de adoptarlas.'},
+  {cat:'creatividad', icon:'image', title:'Imágenes y diseño',
+   short:'Genera borradores visuales y conceptos para tus proyectos.',
+   desc:'Los modelos de imagen crean ilustraciones y maquetas a partir de una descripción. Sirven para explorar direcciones visuales.',
+   steps:['Describe el estilo, los colores y la escena.','Genera varias versiones.','Refina con instrucciones puntuales.'],
+   prompt:'Ilustración minimalista de una ciudad al amanecer, tonos azules suaves, estilo plano, sin texto.',
+   limit:'Revisa las condiciones de uso y los derechos de lo que generes, sobre todo si es para uso comercial.'},
+  {cat:'productividad', icon:'calendar', title:'Reuniones y tareas',
+   short:'Convierte notas en acuerdos, responsables y próximos pasos.',
+   desc:'Transforma apuntes desordenados de una reunión en un acta clara con tareas, responsables y fechas.',
+   steps:['Pega tus notas o la transcripción.','Pide acuerdos, responsables y plazos.','Solicita un mensaje de seguimiento listo para enviar.'],
+   prompt:'Con estas notas, crea una lista de acuerdos y tareas con responsable y fecha, y un mensaje de seguimiento de 3 líneas.',
+   limit:'Confirma con los participantes que los acuerdos reflejan lo que se dijo realmente.'},
+  {cat:'productividad', icon:'book', title:'Aprender a tu ritmo',
+   short:'Un tutor disponible a cualquier hora que se adapta a tu nivel.',
+   desc:'Pide explicaciones graduales, ejemplos, ejercicios y retroalimentación sobre cualquier tema que quieras dominar.',
+   steps:['Indica tu nivel actual y tu meta.','Pide explicaciones con ejemplos cotidianos.','Practica con preguntas y corrige tus respuestas.'],
+   prompt:'Quiero aprender estadística básica desde cero. Hazme un plan de 4 semanas con ejercicios cortos y revisa mis respuestas.',
+   limit:'Contrasta los conceptos clave con libros o cursos confiables; el modelo puede simplificar de más.'}
+];
+
+const FAQ = [
+  ['¿Qué es exactamente un modelo de IA?','Es un programa entrenado con muchos ejemplos para reconocer patrones y generar contenido: texto, imágenes, código o audio. Funciona como un asistente al que le pides cosas con tus propias palabras.'],
+  ['¿La IA realmente entiende lo que dice?','No como una persona. Calcula qué respuesta encaja mejor con tu instrucción según lo que aprendió. Por eso puede sonar muy convincente y, aun así, equivocarse.'],
+  ['¿Puede equivocarse o inventar información?','Sí. A veces genera datos, citas o fuentes que no existen. Verifica cualquier información importante, sobre todo en temas de salud, leyes o finanzas.'],
+  ['¿Reemplazará mi trabajo?','Es más probable que cambie tus tareas que tu profesión completa. Las personas que aprendan a combinarlas con su criterio y experiencia tendrán ventaja. Lo más valioso sigue siendo saber qué pedir y evaluar el resultado.'],
+  ['¿Es seguro compartir información personal?','Mejor evitar datos sensibles: contraseñas, documentos de identidad o información confidencial de tu empresa. Revisa la política de privacidad de cada herramienta y sus opciones de configuración.'],
+  ['¿Cómo escribo buenas instrucciones?','Sé específico: indica el objetivo, el público, el formato y el tono. Agrega un ejemplo si puedes y mejora el resultado con instrucciones de seguimiento, como "hazlo más corto".'],
+  ['¿Por dónde empiezo?','Elige una tarea pequeña y real, como resumir un texto o redactar un correo. Prueba, evalúa el resultado y ajusta. En una semana notarás dónde te ahorra más tiempo.']
+];
+
+/* ===== UTILIDADES ===== */
+const $ = (s, r=document) => r.querySelector(s);
+const icon = n => `<svg class="ic" aria-hidden="true"><use href="#i-${n}"/></svg>`;
+
+/* ===== MENÚ MÓVIL ===== */
+const menuBtn = $('#menuBtn'), nav = $('#nav');
+function setMenu(open){
+  nav.classList.toggle('open', open);
+  menuBtn.setAttribute('aria-expanded', open);
+  menuBtn.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
+  menuBtn.innerHTML = icon(open ? 'x' : 'menu');
+}
+menuBtn.addEventListener('click', () => setMenu(!nav.classList.contains('open')));
+nav.addEventListener('click', e => { if (e.target.closest('a')) setMenu(false); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && nav.classList.contains('open')) { setMenu(false); menuBtn.focus(); } });
+
+/* ===== PORTAFOLIO: filtros y tarjetas ===== */
+const grid = $('#grid'), filters = $('#filters'), count = $('#count');
+const filterList = [['todos','Todos'], ...Object.entries(CATS)];
+
+filters.innerHTML = filterList.map(([k,l],i) =>
+  `<button class="chip" type="button" data-f="${k}" aria-pressed="${i===0}">${l}</button>`).join('');
+
+grid.innerHTML = CASES.map((c,i) => `
+  <button class="card case" type="button" data-i="${i}" data-cat="${c.cat}" aria-haspopup="dialog">
+    <div class="case-top"><span class="ic-wrap">${icon(c.icon)}</span><span class="tag">${CATS[c.cat]}</span></div>
+    <h3>${c.title}</h3>
+    <p>${c.short}</p>
+    <span class="more">Ver detalle ${icon('arrow')}</span>
+  </button>`).join('');
+
+function applyFilter(f){
+  let n = 0;
+  grid.querySelectorAll('.case').forEach(el => {
+    const show = f === 'todos' || el.dataset.cat === f;
+    el.classList.toggle('hide', !show);
+    if (show) n++;
+  });
+  filters.querySelectorAll('.chip').forEach(b => b.setAttribute('aria-pressed', b.dataset.f === f));
+  count.textContent = `Mostrando ${n} ${n === 1 ? 'caso' : 'casos'}`;
+}
+filters.addEventListener('click', e => { const b = e.target.closest('.chip'); if (b) applyFilter(b.dataset.f); });
+applyFilter('todos');
+
+/* ===== MODAL DE DETALLE ===== */
+const modal = $('#modal');
+function openModal(i){
+  const c = CASES[i];
+  $('#mCat').textContent = CATS[c.cat];
+  $('#mTitle').textContent = c.title;
+  $('#mDesc').textContent = c.desc;
+  $('#mSteps').innerHTML = c.steps.map(s => `<li>${s}</li>`).join('');
+  $('#mPrompt').textContent = c.prompt;
+  $('#mLimit').textContent = c.limit;
+  modal.showModal();
+  document.body.style.overflow = 'hidden';
+}
+grid.addEventListener('click', e => { const b = e.target.closest('.case'); if (b) openModal(+b.dataset.i); });
+$('#mClose').addEventListener('click', () => modal.close());
+modal.addEventListener('click', e => { if (e.target === modal) modal.close(); }); // clic en el fondo
+modal.addEventListener('close', () => { document.body.style.overflow = ''; });
+
+/* ===== FAQ (acordeón) ===== */
+$('#faqList').innerHTML = FAQ.map(([q,a],i) => `
+  <div class="card faq-item reveal">
+    <h3 style="font-size:inherit;letter-spacing:0">
+      <button class="faq-q" type="button" id="q${i}" aria-expanded="false" aria-controls="a${i}">
+        <span>${q}</span>${icon('plus')}
+      </button>
+    </h3>
+    <div class="faq-a" id="a${i}" role="region" aria-labelledby="q${i}" data-open="false"><div><p>${a}</p></div></div>
+  </div>`).join('');
+
+$('#faqList').addEventListener('click', e => {
+  const b = e.target.closest('.faq-q'); if (!b) return;
+  const open = b.getAttribute('aria-expanded') === 'true';
+  b.setAttribute('aria-expanded', !open);
+  $('#' + b.getAttribute('aria-controls')).dataset.open = !open;
+});
+
+/* ===== COPIAR INSTRUCCIÓN ===== */
+$('#copyBtn').addEventListener('click', async () => {
+  const text = $('#starterText').textContent;
+  const status = $('#copyStatus'), label = $('#copyLabel');
+  try {
+    await navigator.clipboard.writeText(text);
+    label.textContent = '¡Copiada!';
+    status.textContent = 'Instrucción copiada. Pégala en tu asistente de IA favorito.';
+  } catch (err) {
+    status.textContent = 'No se pudo copiar automáticamente. Selecciona el texto y cópialo manualmente.';
+  }
+  setTimeout(() => { label.textContent = 'Copiar instrucción'; }, 2200);
+});
+
+/* ===== ANIMACIÓN DE ENTRADA Y NAVEGACIÓN ACTIVA ===== */
+const reveals = document.querySelectorAll('.reveal');
+if ('IntersectionObserver' in window){
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }), {threshold:.12});
+  reveals.forEach(el => io.observe(el));
+
+  const links = [...document.querySelectorAll('.nav-list a')];
+  const spy = new IntersectionObserver(es => es.forEach(e => {
+    if (e.isIntersecting) links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + e.target.id));
+  }), {rootMargin:'-45% 0px -50% 0px'});
+  links.forEach(a => { const s = document.querySelector(a.getAttribute('href')); if (s) spy.observe(s); });
+} else {
+  reveals.forEach(el => el.classList.add('in'));
+}
+</script>
+</body>
+</html>
